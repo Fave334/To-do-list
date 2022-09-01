@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Frontend Mentor | Todo app</title>
+  <link rel="stylesheet" href="Roboto_Condensed/RobotoCondensed-Light.ttf">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Josefin_Sans/JosefinSans-VariableFont_wght.ttf">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <script src="jquery-3.1.1.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    window.addEventListener("load", () => {
+      $(function () {
+        let count = 0;
+        $("#btn").click(function () {
+          let val = $("#userInput").val();
+          if (val !== '') {
+            let complete = $("<button class='comp check-press'><img src='images/icon-check.svg' alt=''/></button>")
+            let appended = $("<p class='listItem'></p>").html("<span class='listTxt'>" + val + "</span>");
+            $(appended).prepend(complete);
+            $(appended).append("<img src='images/icon-cross.svg' class='remove'/>");
+            $("#list").append(appended);
+            $("input").val("");
+            count += 1;
+            $("#no").text(count);
+            $(".remove").click(function () {
+              count -= 1;
+              $(this).parent().remove();
+              $("#no").text(count);
+            });
+            return true;
+          }
+          $("#p").fadeIn(500);
+          return false;
+        });
+      });
+    });
+  </script>
+  <!-- Todo
+
+  Add dynamic number items left
+
+  All
+  Active 
+  Completed
+
+  Clear Completed
+
+  Drag and drop to reorder list -->
+  <div class="todoapp default dark">
+    <div class="todo-head dark-head">
+      <div class="logo-mode">
+        <h1>T O D O</h1>
+        <img src="images/icon-sun.svg" alt="">
+        <div class="todo-input">
+          <button id="btn" type="submit" class="check-press"></button>
+          <input type="text" name="todolist" maxlength="35" id="userInput">
+        </div>
+        <p id="p" style="color: #fff; display: none; font-size: 20px;">*Please Fill</p>
+      </div>
+    </div>
+    <div class="full-width-body dark-body">
+      <div class="todo-body" id="list"></div>
+      <div class="footer">
+        <span id="no"></span> Item(s) Left.
+        <div class="links">
+          <a href="javascript:void(0)">All</a>
+          <a href="javascript:void(0)">Active</a>
+          <a href="javascript:void(0)">Completed</a>
+          <div class="last">
+            <a href="javascript:void(0)">Clear Completed</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
